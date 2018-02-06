@@ -16,7 +16,7 @@
       <p>
         <ion-icon name="thumbsup">{{item.data.score}} </ion-icon>&nbsp;&nbsp;
         <ion-icon name="chatboxes">{{item.data.num_comments}} </ion-icon>
-
+        <button ion-button clear item-right (click)="viewItem(item.data)">View</button>
       </p>
     </ion-item>
 

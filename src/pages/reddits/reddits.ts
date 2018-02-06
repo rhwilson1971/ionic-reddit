@@ -33,4 +33,8 @@ export class RedditsPage {
     })
   }
 
+  viewItem(item) {
+
+  }
+
 }
