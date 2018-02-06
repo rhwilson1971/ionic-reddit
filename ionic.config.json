@@ -1,5 +1,16 @@
 {
   "name": "ionicreddit",
   "app_id": "",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {},
+  "proxies": [
+    {
+      "path": "/r",
+      "proxyUrl": "http://reddit.com/r"
+    },
+    {
+      "path": "/r",
+      "proxyUrl" : "https://reddit.com/r"
+    }
+  ]
 }
