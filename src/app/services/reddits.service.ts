@@ -10,7 +10,7 @@ export class RedditsService{
     constructor(http: Http){
 
         this.http = http;
-        this.baseUrl = 'http://reddit.com/r';
+        this.baseUrl = 'https://reddit.com/r';
     }
 
     getPosts(category, limit){
@@ -18,8 +18,14 @@ export class RedditsService{
         let url = this.baseUrl + '/' + category + '/top.json?limit='+limit;
 
         console.log(url);
+        console.log('trying to get items')
 
-        return this.http.get(url).map(res => res.json());
+        let items =
+          this.http.get(url).map(res => res.json());
+
+        console.log('heres some data ' + items);
+
+        return items;
     }
 
 }
