@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {RedditsService} from "../../app/services/reddits.service";
+import {DetailsPage} from "../details/details";
 
 @Component({
   selector: 'reddits',
@@ -9,32 +10,50 @@ import {RedditsService} from "../../app/services/reddits.service";
 export class RedditsPage {
 
   items: any;
-  constructor(public navCtrl: NavController, private redditService: RedditsService ) {
+  category: any;
+  limit: any;
 
+  constructor(public navCtrl: NavController, private redditService: RedditsService ) {
+    this.getDefaults();
   }
 
   ngOnInit(){
-    console.log('getting posts');
-    this.getPosts('sports', 15);
+    this.getPosts(this.category, this.limit);
   }
 
   getPosts(category, limit){
-    console.log('in getting posts');
     this.redditService.getPosts(category,limit).subscribe(response => {
-      console.log('did we get responses or go belly up');
-      console.log(response);
+
       this.items = response.data.children;
 
-      console.log(
-        'items returned'
-      );
-
-      console.log(this.items);
     })
   }
 
   viewItem(item) {
 
+    // this is how pages are createe
+    this.navCtrl.push(DetailsPage, {
+      item: item
+    });
+  }
+
+  changeCategory(){
+    this.getPosts(this.category, this.limit);
+  }
+
+  getDefaults(){
+
+    if(localStorage.getItem('category') != null){
+      this.category = localStorage.getItem('category');
+    } else {
+      this.category = 'sports';
+    }
+
+    if(localStorage.getItem('limit') != null) {
+      this.limit = localStorage.getItem('limit');
+    } else {
+      this.limit = 15;
+    }
   }
 
 }
